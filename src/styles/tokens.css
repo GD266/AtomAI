@@ -1,49 +1,59 @@
 @theme {
-  /* ===== Colors ===== */
-  
-  /* Neutral scale */
-  --color-neutral-50: 250 250 255;
-  --color-neutral-100: 238 238 242;
-  --color-neutral-200: 214 214 222;
-  --color-neutral-300: 182 182 196;
-  --color-neutral-400: 148 148 164;
-  --color-neutral-500: 115 115 135;
-  --color-neutral-600: 88 88 106;
-  --color-neutral-700: 64 64 80;
-  --color-neutral-800: 36 36 46;
-  --color-neutral-900: 15 15 20;
-  --color-neutral-950: 4 4 6;
+  /* ===== Deep Black Background ===== */
+  --color-background: #000000;
+  --color-background-alt: #040406;
 
-  /* Glass materials */
-  --color-glass: 255 255 255 / 0.05;
-  --color-glass-strong: 255 255 255 / 0.08;
-  --color-glass-subtle: 255 255 255 / 0.02;
-  --color-glass-hover: 255 255 255 / 0.1;
+  /* ===== Layered Charcoal Shades ===== */
+  --color-charcoal-900: rgb(5 5 7);
+  --color-charcoal-800: rgb(10 10 12);
+  --color-charcoal-700: rgb(15 15 18);
+  --color-charcoal-600: rgb(22 22 26);
 
-  /* Borders */
-  --color-border: 255 255 255 / 0.08;
-  --color-border-strong: 255 255 255 / 0.12;
-  --color-border-stronger: 255 255 255 / 0.16;
+  /* ===== Semantic Surfaces ===== */
+  --color-surface: var(--color-charcoal-800);
+  --color-surface-elevated: var(--color-charcoal-700);
+  --color-surface-raised: var(--color-charcoal-600);
+  --color-surface-panel: rgba(8 8 10 / 0.45);
 
-  /* Shadows (already include alpha in the rgba) */
-  --color-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --color-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --color-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.25);
-  --color-shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.35);
+  /* ===== Glass Materials (Translucent) ===== */
+  --color-glass: rgba(255 255 255 / 0.035);
+  --color-glass-strong: rgba(255 255 255 / 0.065);
+  --color-glass-subtle: rgba(255 255 255 / 0.02);
+  --color-glass-hover: rgba(255 255 255 / 0.085);
+  --color-glass-elevated: rgba(255 255 255 / 0.075);
 
-  /* Accent */
-  --color-accent: 0 122 255;
-  --color-accent-hover: 10 130 255;
-  --color-accent-active: 0 110 230;
+  /* ===== Glass Borders (Subtle) ===== */
+  --color-glass-border: rgba(255 255 255 / 0.04);
+  --color-glass-border-strong: rgba(255 255 255 / 0.06);
+  --color-glass-border-stronger: rgba(255 255 255 / 0.1);
 
-  /* Semantic */
-  --color-background: var(--color-neutral-950);
-  --color-surface: var(--color-neutral-900);
-  --color-surface-elevated: var(--color-neutral-800);
-  --color-text-primary: var(--color-neutral-50);
-  --color-text-secondary: var(--color-neutral-300);
-  --color-text-tertiary: var(--color-neutral-500);
-  --color-text-inverse: var(--color-neutral-950);
+  /* ===== Soft Highlights ===== */
+  --color-highlight: rgba(255 255 255 / 0.09);
+  --color-highlight-inner: rgba(255 255 255 / 0.045);
+  --color-highlight-bottom: rgba(0 0 0 / 0.3);
+
+  /* ===== Borders ===== */
+  --color-border: rgba(255 255 255 / 0.04);
+  --color-border-strong: rgba(255 255 255 / 0.06);
+  --color-border-stronger: rgba(255 255 255 / 0.1);
+
+  /* ===== Shadows (Controlled, Deep) ===== */
+  --color-shadow-sm: 0 1px 2px rgba(0 0 0 / 0.2);
+  --color-shadow: 0 2px 8px rgba(0 0 0 / 0.25), 0 0 0 1px rgba(255 255 255 / 0.03);
+  --color-shadow-lg: 0 4px 16px rgba(0 0 0 / 0.32), 0 0 0 1px rgba(255 255 255 / 0.035);
+  --color-shadow-xl: 0 8px 32px rgba(0 0 0 / 0.42), 0 0 0 1px rgba(255 255 255 / 0.04);
+  --color-shadow-2xl: 0 16px 40px rgba(0 0 0 / 0.5), 0 0 0 1px rgba(255 255 255 / 0.05);
+
+  /* ===== Accent (Very Subtle) ===== */
+  --color-accent: rgb(100 180 255);
+  --color-accent-soft: rgb(100 180 255 / 0.5);
+  --color-accent-subtle: rgb(100 180 255 / 0.25);
+
+  /* ===== Text ===== */
+  --color-text-primary: rgb(240 240 245);
+  --color-text-secondary: rgb(170 170 180);
+  --color-text-tertiary: rgb(110 110 120);
+  --color-text-inverse: var(--color-charcoal-900);
 
   /* ===== Spacing (8px grid, rem-based) ===== */
   --spacing-3xs: 0.25rem;
@@ -56,14 +66,13 @@
   --spacing-2xl: 2.75rem;
   --spacing-3xl: 3.5rem;
 
-  /* ===== Border Radius ===== */
-  --radius-xs: 0.25rem;
+  /* ===== Border Radius (restrained 6-14px) ===== */
+  --radius-xs: 0.375rem;
   --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-2xl: 2.5rem;
-  --radius-3xl: 4rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 0.875rem;
   --radius-full: 9999px;
 
   /* ===== Blur ===== */
@@ -83,7 +92,6 @@
   --font-size-h1: 2.5rem;
   --font-size-h2: 1.75rem;
   --font-size-h3: 1.375rem;
-  --font-size-h4: 1.125rem;
   --font-size-body: 1rem;
   --font-size-caption: 0.875rem;
   --font-size-micro: 0.75rem;
@@ -97,7 +105,6 @@
   --line-height-h1: 1.1;
   --line-height-h2: 1.2;
   --line-height-h3: 1.3;
-  --line-height-h4: 1.4;
   --line-height-body: 1.6;
   --line-height-caption: 1.5;
   --line-height-micro: 1.4;
@@ -185,7 +192,7 @@
 
   /* Selection */
   ::selection {
-    background: rgba(0, 122, 255, 0.3);
+    background: rgba(100 180 255 / 0.2);
     color: #fff;
   }
 
@@ -208,12 +215,24 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--color-border-strong);
   }
+
+  /* Noise texture overlay (subtle) */
+  html::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'%3E%3C/feTurbulence%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: 96px 96px;
+    opacity: 0.022;
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 /* ===== Text utilities ===== */
 @layer components {
   .text-gradient {
-    background: linear-gradient(90deg, rgb(0 122 255), rgb(100 200 255));
+    background: linear-gradient(90deg, rgb(100 180 255), rgb(180 220 255));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

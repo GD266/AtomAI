@@ -1,4 +1,4 @@
-/* ===== Easing curves ===== */
+/* ===== Easing curves (premium) ===== */
 @theme {
   --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
   --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
@@ -6,6 +6,8 @@
   --ease-emphasized-exit: cubic-bezier(0, 0, 0, 1);
   --ease-decelerate: cubic-bezier(0, 0, 0, 1);
   --ease-accelerate: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out-quad: cubic-bezier(0.45, 0, 0.55, 1);
 }
 
 /* ===== Keyframes ===== */
@@ -95,6 +97,16 @@
   to { transform: translateY(0); }
 }
 
+@keyframes slide-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
 @keyframes pulse-glow {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
@@ -108,6 +120,16 @@
 @keyframes slow-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes subtle-breathe {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.65; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
 }
 
 /* ===== Animation utilities ===== */
@@ -155,12 +177,24 @@
   animation: slide-down 0.3s cubic-bezier(0.2, 0, 0, 1) both;
 }
 
+@utility animate-slide-left {
+  animation: slide-left 0.3s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
 @utility animate-pulse-glow {
   animation: pulse-glow 1.5s ease-in-out infinite both;
 }
 
 @utility animate-slow-spin {
   animation: slow-spin 6s linear infinite both;
+}
+
+@utility animate-subtle-breathe {
+  animation: subtle-breathe 4s ease-in-out infinite both;
+}
+
+@utility animate-float {
+  animation: float 3s ease-in-out infinite both;
 }
 
 /* ===== Transition utilities ===== */
@@ -190,6 +224,10 @@
 
 @utility transition-transform {
   transition: transform 150ms ease;
+}
+
+@utility transition-backdrop {
+  transition: backdrop-filter 250ms ease;
 }
 
 @utility delay-75 {

@@ -1,1 +1,1 @@
-export { type ComponentType, type ReactNode } from 'react'
+export { AppShell } from './AppShell'
