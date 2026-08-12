@@ -1,61 +1,68 @@
 @theme {
-  /* ===== Deep Black Background ===== */
-  --color-background: #000000;
-  --color-background-alt: #040406;
+  /* ===== Near-Black Base ===== */
+  --color-background: #060608;
+  --color-background-deep: #040405;
 
-  /* ===== Layered Charcoal Shades ===== */
-  --color-charcoal-900: rgb(5 5 7);
-  --color-charcoal-800: rgb(10 10 12);
-  --color-charcoal-700: rgb(15 15 18);
-  --color-charcoal-600: rgb(22 22 26);
+  /* ===== Charcoal Scale (premium, cool-tinted) ===== */
+  --color-charcoal-950: #050506;
+  --color-charcoal-900: #070709;
+  --color-charcoal-850: #09090b;
+  --color-charcoal-800: #0b0b0d;
+  --color-charcoal-750: #0d0d10;
+  --color-charcoal-700: #101013;
+  --color-charcoal-650: #121216;
+  --color-charcoal-600: #141418;
+  --color-charcoal-550: #1a1a1f;
 
   /* ===== Semantic Surfaces ===== */
-  --color-surface: var(--color-charcoal-800);
-  --color-surface-elevated: var(--color-charcoal-700);
-  --color-surface-raised: var(--color-charcoal-600);
-  --color-surface-panel: rgba(8 8 10 / 0.45);
+  --color-surface: var(--color-charcoal-900);
+  --color-surface-raised: var(--color-charcoal-800);
+  --color-surface-2: var(--color-charcoal-750);
+  --color-surface-3: var(--color-charcoal-700);
+  --color-surface-4: var(--color-charcoal-650);
+  --color-surface-panel: rgb(11 11 13 / 0.72);
+  --color-surface-modal: rgb(7 7 9 / 0.88);
 
-  /* ===== Glass Materials (Translucent) ===== */
-  --color-glass: rgba(255 255 255 / 0.035);
-  --color-glass-strong: rgba(255 255 255 / 0.065);
-  --color-glass-subtle: rgba(255 255 255 / 0.02);
-  --color-glass-hover: rgba(255 255 255 / 0.085);
-  --color-glass-elevated: rgba(255 255 255 / 0.075);
+  /* ===== Overlays (glass used only for depth) ===== */
+  --color-overlay-subtle: rgb(255 255 255 / 0.02);
+  --color-overlay: rgb(255 255 255 / 0.045);
+  --color-overlay-hover: rgb(255 255 255 / 0.07);
+  --color-overlay-strong: rgb(255 255 255 / 0.1);
 
-  /* ===== Glass Borders (Subtle) ===== */
-  --color-glass-border: rgba(255 255 255 / 0.04);
-  --color-glass-border-strong: rgba(255 255 255 / 0.06);
-  --color-glass-border-stronger: rgba(255 255 255 / 0.1);
+  /* ===== Borders (hairline, refined) ===== */
+  --color-border-faint: rgb(255 255 255 / 0.05);
+  --color-border-subtle: rgb(255 255 255 / 0.08);
+  --color-border: rgb(255 255 255 / 0.1);
+  --color-border-strong: rgb(255 255 255 / 0.16);
 
-  /* ===== Soft Highlights ===== */
-  --color-highlight: rgba(255 255 255 / 0.09);
-  --color-highlight-inner: rgba(255 255 255 / 0.045);
-  --color-highlight-bottom: rgba(0 0 0 / 0.3);
+  /* ===== Highlights ===== */
+  --color-highlight: rgb(255 255 255 / 0.06);
+  --color-highlight-inner: rgb(255 255 255 / 0.035);
 
-  /* ===== Borders ===== */
-  --color-border: rgba(255 255 255 / 0.04);
-  --color-border-strong: rgba(255 255 255 / 0.06);
-  --color-border-stronger: rgba(255 255 255 / 0.1);
+  /* ===== Shadows (soft, low-opacity) ===== */
+  --color-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --color-shadow-md: 0 2px 10px rgb(0 0 0 / 0.32);
+  --color-shadow-lg: 0 8px 28px rgb(0 0 0 / 0.36);
+  --color-shadow-xl: 0 20px 52px rgb(0 0 0 / 0.44);
 
-  /* ===== Shadows (Controlled, Deep) ===== */
-  --color-shadow-sm: 0 1px 2px rgba(0 0 0 / 0.2);
-  --color-shadow: 0 2px 8px rgba(0 0 0 / 0.25), 0 0 0 1px rgba(255 255 255 / 0.03);
-  --color-shadow-lg: 0 4px 16px rgba(0 0 0 / 0.32), 0 0 0 1px rgba(255 255 255 / 0.035);
-  --color-shadow-xl: 0 8px 32px rgba(0 0 0 / 0.42), 0 0 0 1px rgba(255 255 255 / 0.04);
-  --color-shadow-2xl: 0 16px 40px rgba(0 0 0 / 0.5), 0 0 0 1px rgba(255 255 255 / 0.05);
+  /* ===== Accent (muted steel, used sparingly) ===== */
+  --color-accent: #93a7c4;
+  --color-accent-strong: #bcc9dc;
+  --color-accent-subtle: rgb(147 167 196 / 0.12);
 
-  /* ===== Accent (Very Subtle) ===== */
-  --color-accent: rgb(100 180 255);
-  --color-accent-soft: rgb(100 180 255 / 0.5);
-  --color-accent-subtle: rgb(100 180 255 / 0.25);
+  /* ===== Primary action (inverted, Raycast-style) ===== */
+  --color-primary: #f2f2f5;
+  --color-primary-hover: #ffffff;
+  --color-on-primary: #0a0a0c;
 
   /* ===== Text ===== */
-  --color-text-primary: rgb(240 240 245);
-  --color-text-secondary: rgb(170 170 180);
-  --color-text-tertiary: rgb(110 110 120);
-  --color-text-inverse: var(--color-charcoal-900);
+  --color-text-primary: #ececf1;
+  --color-text-secondary: #a8a8b1;
+  --color-text-tertiary: #7e7e89;
+  --color-text-quiet: #5c5c66;
+  --color-text-inverse: #0a0a0c;
 
-  /* ===== Spacing (8px grid, rem-based) ===== */
+  /* ===== Spacing (8px grid) ===== */
   --spacing-3xs: 0.25rem;
   --spacing-2xs: 0.5rem;
   --spacing-xs: 0.75rem;
@@ -66,17 +73,14 @@
   --spacing-2xl: 2.75rem;
   --spacing-3xl: 3.5rem;
 
-  /* ===== Border Radius (restrained 6-14px) ===== */
-  --radius-xs: 0.375rem;
-  --radius-sm: 0.5rem;
-  --radius-md: 0.625rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 0.875rem;
-  --radius-2xl: 0.875rem;
+  /* ===== Border Radius (restrained 6-12px) ===== */
+  --radius-xs: 0.375rem;   /* 6px */
+  --radius-sm: 0.5rem;     /* 8px */
+  --radius-md: 0.625rem;   /* 10px */
+  --radius-lg: 0.75rem;    /* 12px */
   --radius-full: 9999px;
 
   /* ===== Blur ===== */
-  --blur-none: 0;
   --blur-sm: 2px;
   --blur-md: 4px;
   --blur-lg: 8px;
@@ -85,13 +89,13 @@
   --blur-3xl: 40px;
 
   /* ===== Typography ===== */
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Segoe UI Variable Text', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   --font-mono: ui-monospace, Consolas, Monaco, 'Courier New', monospace;
 
-  --font-size-display: 3.5rem;
-  --font-size-h1: 2.5rem;
-  --font-size-h2: 1.75rem;
-  --font-size-h3: 1.375rem;
+  --font-size-display: 2.75rem;
+  --font-size-h1: 2.25rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
   --font-size-body: 1rem;
   --font-size-caption: 0.875rem;
   --font-size-micro: 0.75rem;
@@ -101,17 +105,19 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  --line-height-display: 1.05;
-  --line-height-h1: 1.1;
+  --line-height-display: 1.08;
+  --line-height-h1: 1.12;
   --line-height-h2: 1.2;
   --line-height-h3: 1.3;
   --line-height-body: 1.6;
   --line-height-caption: 1.5;
   --line-height-micro: 1.4;
 
-  --letter-spacing-tight: -0.02em;
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-tighter: -0.02em;
   --letter-spacing-normal: 0;
   --letter-spacing-wide: 0.025em;
+  --letter-spacing-extra-wide: 0.08em;
 }
 
 /* ===== Base styles ===== */
@@ -122,6 +128,7 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     color-scheme: dark;
     background-color: var(--color-background);
     color: var(--color-text-primary);
@@ -140,28 +147,28 @@
   /* Typography scale */
   h1, .text-display {
     font-size: var(--font-size-display);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-h1);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-display);
     letter-spacing: var(--letter-spacing-tight);
   }
 
   h2 {
     font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-h1);
-    letter-spacing: var(--letter-spacing-tight);
+    letter-spacing: var(--letter-spacing-tighter);
   }
 
   h3 {
     font-size: var(--font-size-h2);
     font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-h2);
-    letter-spacing: var(--letter-spacing-tight);
+    letter-spacing: var(--letter-spacing-tighter);
   }
 
   h4 {
     font-size: var(--font-size-h3);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-medium);
     line-height: var(--line-height-h3);
   }
 
@@ -179,20 +186,21 @@
   code {
     padding: 0.125rem 0.375rem;
     border-radius: var(--radius-xs);
-    background: var(--color-surface-elevated);
+    background: var(--color-surface-raised);
     color: var(--color-accent);
   }
 
   pre {
     padding: 1rem;
     border-radius: var(--radius-md);
-    background: var(--color-surface-elevated);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border-faint);
     overflow-x: auto;
   }
 
   /* Selection */
   ::selection {
-    background: rgba(100 180 255 / 0.2);
+    background: rgb(147 167 196 / 0.24);
     color: #fff;
   }
 
@@ -207,13 +215,13 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-border);
+    background: var(--color-border-faint);
     border-radius: var(--radius-full);
     transition: background 0.2s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-border-strong);
+    background: var(--color-border-subtle);
   }
 
   /* Noise texture overlay (subtle) */
@@ -223,22 +231,14 @@
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'%3E%3C/feTurbulence%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     background-size: 96px 96px;
-    opacity: 0.022;
+    opacity: 0.018;
     pointer-events: none;
-    z-index: 1;
+    z-index: 2;
   }
 }
 
 /* ===== Text utilities ===== */
 @layer components {
-  .text-gradient {
-    background: linear-gradient(90deg, rgb(100 180 255), rgb(180 220 255));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
   .text-muted {
     color: var(--color-text-secondary);
   }

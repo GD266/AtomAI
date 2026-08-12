@@ -1,176 +1,64 @@
-/* ===== Liquid Glass Surfaces ===== */
-@utility glass {
-  background: var(--color-glass);
-  border: 1px solid var(--color-glass-border);
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    inset 0 -1px 0 var(--color-highlight-bottom),
-    var(--color-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  position: relative;
-  isolation: isolate;
-}
+/* ===== Refined Surfaces (glass only where depth improves) ===== */
 
-@utility glass-strong {
-  background: var(--color-glass-strong);
-  border: 1px solid var(--color-glass-border-strong);
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    inset 0 -1px 0 var(--color-highlight-bottom),
-    var(--color-shadow-lg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  position: relative;
-  isolation: isolate;
-}
-
-@utility glass-subtle {
-  background: var(--color-glass-subtle);
-  border: 1px solid var(--color-glass-border);
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    0 1px 3px rgba(0 0 0 / 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  position: relative;
-  isolation: isolate;
-}
-
-@utility glass-hover {
-  background: var(--color-glass-hover);
-  border: 1px solid var(--color-glass-border-strong);
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    inset 0 -1px 0 var(--color-highlight-bottom),
-    var(--color-shadow-lg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  position: relative;
-  isolation: isolate;
-}
-
-@utility glass-elevated {
-  background: var(--color-glass-elevated);
-  border: 1px solid var(--color-glass-border-strong);
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    inset 0 -1px 0 var(--color-highlight-bottom),
-    var(--color-shadow-xl);
+/* Thin backdrop panel — sidebar, top nav */
+@utility surface-blur {
+  background: var(--color-surface-panel);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  position: relative;
-  isolation: isolate;
 }
 
-@utility glass-panel {
-  background: var(--color-surface-panel);
-  border: 1px solid var(--color-glass-border);
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    inset 0 -1px 0 var(--color-highlight-bottom),
-    var(--color-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  position: relative;
-  isolation: isolate;
+/* Elevated material — toolbar buttons, search */
+@utility surface-soft {
+  background: var(--color-overlay-subtle);
+  border: 1px solid var(--color-border-faint);
 }
 
-/* ===== Soft Glass Highlight (use as wrapper) ===== */
-@utility glass-highlight {
-  position: relative;
+/* Interactive elevated surface */
+@utility surface-soft-hover {
+  background: var(--color-overlay);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--color-shadow-sm);
 }
 
-@layer components {
-  .glass-highlight::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: linear-gradient(
-      to bottom,
-      var(--color-highlight),
-      transparent 60%
-    );
-    mask: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 70%);
-    -webkit-mask: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 70%);
-  }
+/* Overlay panel for menus / drawers */
+@utility surface-modal {
+  background: var(--color-surface-modal);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid var(--color-border-faint);
 }
 
 /* ===== Border utilities ===== */
-@utility border-glass {
-  border: 1px solid var(--color-glass-border);
+@utility border-hairline {
+  border: 1px solid var(--color-border-faint);
 }
 
-@utility border-glass-strong {
-  border: 1px solid var(--color-glass-border-strong);
+@utility border-hairline-subtle {
+  border: 1px solid var(--color-border-subtle);
 }
 
-@utility border-glass-stronger {
-  border: 1px solid var(--color-glass-border-stronger);
+@utility border-hairline-strong {
+  border: 1px solid var(--color-border);
 }
 
-@utility border-glass-highlight {
-  border: 1px solid var(--color-glass-border);
-  box-shadow: inset 0 1px 0 var(--color-highlight-inner);
+/* ===== Shadow utilities ===== */
+@utility shadow-soft {
+  box-shadow: var(--color-shadow-sm);
 }
 
-/* ===== Shadow utilities (controlled) ===== */
-@utility shadow-glass {
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    var(--color-shadow-sm);
+@utility shadow-soft-md {
+  box-shadow: var(--color-shadow-md);
 }
 
-@utility shadow-glass-lg {
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    var(--color-shadow-lg);
-}
-
-@utility shadow-elevated {
+@utility shadow-soft-lg {
   box-shadow: var(--color-shadow-lg);
 }
 
-@utility shadow-elevated-xl {
+@utility shadow-soft-xl {
   box-shadow: var(--color-shadow-xl);
 }
 
-@utility shadow-inner-glass {
-  box-shadow:
-    inset 0 1px 0 var(--color-highlight-inner),
-    inset 0 -1px 0 var(--color-highlight-bottom);
-}
-
-/* ===== Blur utilities ===== */
-@utility blur-glass {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-@utility blur-glass-strong {
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-}
-
-/* ===== Combined surface utilities ===== */
-@utility surface-panel {
-  background: var(--color-surface-panel);
-  border: 1px solid var(--color-glass-border);
-}
-
-@utility surface-raised {
-  background: var(--color-surface-elevated);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--color-shadow);
-}
-
-@utility surface-charcoal {
-  background: var(--color-charcoal-700);
-  border: 1px solid var(--color-glass-border);
-}
-
-@utility surface-charcoal-deep {
-  background: var(--color-charcoal-800);
+/* Hairline top highlight for depth */
+@utility edge-light {
+  box-shadow: inset 0 1px 0 var(--color-highlight-inner);
 }

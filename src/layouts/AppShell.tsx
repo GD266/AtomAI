@@ -2,50 +2,22 @@ import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { AmbientBackground } from '@/components/background/AmbientBackground'
+import { GlassSidebar } from '@/components/layout/GlassSidebar'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { TopNav } from '@/components/layout/TopNav'
 import type { SectionId } from '@/lib/navigation'
-import { cn } from '@/lib/utils'
 
 type AppShellProps = {
   children: ReactNode
+  active: SectionId
+  onSelect: (id: SectionId) => void
 }
 
-const sidebarVariants = {
-  hidden: { opacity: 0, x: -8 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.32,
-      ease: [0.2, 0, 0, 1] as const,
-      when: "beforeChildren",
-      staggerChildren: 0.04,
-      delayChildren: 0.04,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -6 },
-  visible: { opacity: 1, x: 0 },
-}
-
-const panelVariants = {
-  hidden: { opacity: 0, y: 6 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.3, ease: [0.2, 0, 0, 1] as const },
-  },
-}
-
-export function AppShell({ children }: AppShellProps) {
-  const [active, setActive] = useState<SectionId>('home')
+export function AppShell({ children, active, onSelect }: AppShellProps) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleSelect = (id: SectionId) => {
-    setActive(id)
+    onSelect(id)
     setMenuOpen(false)
   }
 
@@ -53,19 +25,8 @@ export function AppShell({ children }: AppShellProps) {
     <div className="relative flex h-svh overflow-hidden bg-background text-text-primary">
       <AmbientBackground />
 
-      {/* Desktop sidebar */}
-      <motion.div
-        variants={sidebarVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-20 hidden lg:block"
-      >
-        <Sidebar
-          active={active}
-          onSelect={handleSelect}
-          itemVariants={itemVariants}
-        />
-      </motion.div>
+      {/* Desktop icon rail */}
+      <Sidebar active={active} onSelect={handleSelect} />
 
       {/* Mobile drawer */}
       <AnimatePresence initial={false}>
@@ -73,11 +34,11 @@ export function AppShell({ children }: AppShellProps) {
           <>
             <motion.div
               key="backdrop"
-              className="absolute inset-0 z-30 bg-black/70 backdrop-blur-sm"
+              className="absolute inset-0 z-30 bg-black/55 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2, ease: [0.2, 0, 0, 1] }}
+              transition={{ duration: 0.18, ease: [0.2, 0, 0, 1] }}
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
@@ -86,36 +47,21 @@ export function AppShell({ children }: AppShellProps) {
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
-              transition={{
-                type: 'tween',
-                duration: 0.28,
-                ease: [0.2, 0, 0, 1],
-              }}
+              transition={{ type: 'tween', duration: 0.26, ease: [0.2, 0, 0, 1] }}
             >
-              <Sidebar
-                active={active}
-                onSelect={handleSelect}
-                className="h-full w-66 border-r border-glass-border"
-                itemVariants={itemVariants}
-              />
+              <GlassSidebar active={active} onSelect={handleSelect} />
             </motion.div>
           </>
         )}
       </AnimatePresence>
 
       {/* Main column */}
-      <motion.div
-        variants={panelVariants}
-        initial="hidden"
-        animate="visible"
-        className={cn(
-          'relative z-10 flex min-w-0 flex-1 flex-col',
-          menuOpen && 'lg:blur-sm',
-        )}
-      >
+      <div className="relative z-10 flex min-w-0 flex-1 flex-col">
         <TopNav active={active} onMenuOpen={() => setMenuOpen(true)} />
-        <main className="relative flex-1 overflow-y-auto">{children}</main>
-      </motion.div>
+        <main className="relative flex-1 overflow-y-auto">
+          {children}
+        </main>
+      </div>
     </div>
   )
 }

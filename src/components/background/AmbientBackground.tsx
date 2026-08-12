@@ -4,44 +4,40 @@ export function AmbientBackground() {
       aria-hidden
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
-      {/* Deep black base with subtle charcoal gradient */}
+      {/* Near-black base with a single broad cool gradient */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 20% 30%, rgba(10, 10, 12, 0.55) 0%, transparent 60%), radial-gradient(ellipse at 90% 85%, rgba(5, 5, 7, 0.35) 0%, transparent 60%)',
+            'radial-gradient(1200px 760px at 50% -14%, rgb(255 255 255 / 0.028), transparent 60%), radial-gradient(980px 640px at 92% 114%, rgb(147 167 196 / 0.026), transparent 62%), radial-gradient(820px 520px at 4% 98%, rgb(147 167 196 / 0.016), transparent 60%)',
         }}
       />
 
-      {/* Subtle accent gradient orbs (very low opacity) */}
+      {/* Soft center light behind the workspace */}
       <div
-        className="absolute -top-52 -left-52 h-[460px] w-[460px] rounded-full"
+        className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(circle, rgba(100, 180, 255, 0.06), transparent 60%)',
-          filter: 'blur(64px)',
+            'radial-gradient(640px 420px at 50% 30%, rgb(255 255 255 / 0.02), transparent 65%)',
+          filter: 'blur(56px)',
         }}
       />
+
+      {/* Faint cool glow along the top band */}
       <div
-        className="absolute -right-56 bottom-[-14rem] h-[480px] w-[480px] rounded-full"
+        className="absolute inset-x-0 top-0 h-[340px]"
         style={{
           background:
-            'radial-gradient(circle, rgba(255, 255, 255, 0.025), transparent 65%)',
+            'linear-gradient(to bottom, rgb(147 167 196 / 0.028), transparent)',
           filter: 'blur(72px)',
         }}
       />
 
-      {/* Faint grid for depth */}
+      {/* Vignette — pulls the edges back to black */}
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage:
-            'linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px)',
-          backgroundSize: '56px 56px',
-          maskImage:
-            'radial-gradient(900px 600px at 50% 0%, black 0%, transparent 75%)',
-          WebkitMaskImage:
-            'radial-gradient(900px 600px at 50% 0%, black 0%, transparent 75%)',
+          boxShadow: 'inset 0 0 200px 60px rgb(0 0 0 / 0.3)',
         }}
       />
     </div>
