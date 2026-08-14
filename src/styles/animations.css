@@ -132,6 +132,57 @@
   50% { transform: translateY(-2px); }
 }
 
+/* ===== Ambient background drift (barely noticeable) ===== */
+@keyframes ambient-drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(36px, -24px) scale(1.04); }
+}
+
+@keyframes ambient-drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1.02); }
+  50% { transform: translate(-28px, 20px) scale(1); }
+}
+
+@keyframes ambient-drift-c {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, 16px) scale(1.03); }
+}
+
+@keyframes ambient-breathe {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+/* ===== Ambient animation utilities ===== */
+@utility ambient-drift-a {
+  animation: ambient-drift-a 34s ease-in-out infinite;
+  will-change: transform;
+}
+
+@utility ambient-drift-b {
+  animation: ambient-drift-b 46s ease-in-out infinite;
+  will-change: transform;
+}
+
+@utility ambient-drift-c {
+  animation: ambient-drift-c 58s ease-in-out infinite;
+  will-change: transform;
+}
+
+@utility ambient-breathe {
+  animation: ambient-breathe 26s ease-in-out infinite;
+}
+
+/* Respect reduced motion — ambient lighting rests static */
+@media (prefers-reduced-motion: reduce) {
+  .ambient-drift-a,
+  .ambient-drift-b,
+  .ambient-drift-c,
+  .ambient-breathe {
+    animation: none;
+  }
+}
+
 /* ===== Animation utilities ===== */
 @utility animate-fade-in {
   animation: fade-in 0.15s ease-out both;

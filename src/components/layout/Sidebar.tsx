@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
-import { Atom } from 'lucide-react'
+import { Atom, Home, MessageSquare, Cpu, Settings } from 'lucide-react'
 import type { ReactNode } from 'react'
-import { cn } from '@/lib/utils'
 import { NAV_FOOTER, NAV_SECTIONS } from '@/lib/navigation'
 import type { SectionId } from '@/lib/navigation'
 
@@ -10,40 +9,11 @@ type SidebarProps = {
   onSelect: (id: SectionId) => void
 }
 
-function RailButton({
-  isActive,
-  label,
-  onClick,
-  children,
-}: {
-  isActive?: boolean
-  label: string
-  onClick: () => void
-  children: ReactNode
-}) {
-  return (
-    <motion.button
-      type="button"
-      aria-label={label}
-      title={label}
-      onClick={onClick}
-      whileTap={{ scale: 0.94 }}
-      transition={{ duration: 0.12, ease: [0.25, 0.1, 0.25, 1] }}
-      className={cn(
-        'relative flex h-9 w-9 items-center justify-center rounded-[8px] text-text-tertiary transition-colors duration-150 hover:bg-overlay-subtle hover:text-text-secondary',
-        isActive && 'text-text-primary',
-      )}
-    >
-      {isActive && (
-        <motion.span
-          layoutId="rail-active"
-          transition={{ type: 'spring', stiffness: 480, damping: 38 }}
-          className="absolute inset-0 rounded-[8px] border border-border-faint bg-overlay-subtle"
-        />
-      )}
-      <span className="relative">{children}</span>
-    </motion.button>
-  )
+const icons: Record<SectionId, ReactNode> = {
+  home: <Home className="h-[17px] w-[17px]" />,
+  chats: <MessageSquare className="h-[17px] w-[17px]" />,
+  models: <Cpu className="h-[17px] w-[17px]" />,
+  settings: <Settings className="h-[17px] w-[17px]" />,
 }
 
 export function Sidebar({ active, onSelect }: SidebarProps) {
@@ -58,25 +28,40 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.05, ease: [0.2, 0, 0, 1] }}
-        className="mb-7 flex h-7 w-7 items-center justify-center rounded-[8px] border border-border-faint bg-white/[0.03] text-text-secondary"
+        transition={{ duration: 0.3, delay: 0.05 }}
+        className="mb-7 flex h-6 w-6 items-center justify-center rounded-[8px] border border-border-faint bg-white/[0.015] text-text-tertiary"
       >
-        <Atom className="h-[15px] w-[15px]" strokeWidth={1.75} />
+        <Atom className="h-[13px] w-[13px]" strokeWidth={1.75} />
       </motion.div>
 
-      {/* Navigation */}
+      {/* Nav */}
       <nav className="flex flex-col items-center gap-2">
         {NAV_SECTIONS.map((item) => {
-          const Icon = item.icon
+          const isActive = active === item.id
           return (
-            <RailButton
+            <motion.button
               key={item.id}
-              label={item.label}
-              isActive={active === item.id}
-              onClick={() => onSelect(item.id)}
+              type="button"
+              title={item.label}
+              onClick={() => onSelect(item.id as SectionId)}
+              whileTap={{ scale: 0.94 }}
+              transition={{ duration: 0.12 }}
+              className={
+                'relative flex h-9 w-9 items-center justify-center rounded-[8px] ' +
+                (isActive
+                  ? 'text-text-primary'
+                  : 'text-text-tertiary hover:text-text-secondary')
+              }
             >
-              <Icon className="h-[17px] w-[17px]" strokeWidth={1.6} />
-            </RailButton>
+              {isActive && (
+                <motion.span
+                  layoutId="nav-indicator"
+                  transition={{ type: 'spring', stiffness: 480, damping: 38 }}
+                  className="absolute inset-0 rounded-[8px] border-l-2 border-accent"
+                />
+              )}
+              {icons[item.id]}
+            </motion.button>
           )
         })}
       </nav>
@@ -86,23 +71,38 @@ export function Sidebar({ active, onSelect }: SidebarProps) {
       {/* Footer */}
       <div className="flex flex-col items-center gap-4">
         {NAV_FOOTER.map((item) => {
-          const Icon = item.icon
+          const isActive = active === item.id
           return (
-            <RailButton
+            <motion.button
               key={item.id}
-              label={item.label}
-              isActive={active === item.id}
-              onClick={() => onSelect(item.id)}
+              type="button"
+              title={item.label}
+              onClick={() => onSelect(item.id as SectionId)}
+              whileTap={{ scale: 0.94 }}
+              transition={{ duration: 0.12 }}
+              className={
+                'relative flex h-9 w-9 items-center justify-center rounded-[8px] ' +
+                (isActive
+                  ? 'text-text-primary'
+                  : 'text-text-tertiary hover:text-text-secondary')
+              }
             >
-              <Icon className="h-[17px] w-[17px]" strokeWidth={1.6} />
-            </RailButton>
+              {isActive && (
+                <motion.span
+                  layoutId="nav-indicator-footer"
+                  transition={{ type: 'spring', stiffness: 480, damping: 38 }}
+                  className="absolute inset-0 rounded-[8px] border-l-2 border-accent"
+                />
+              )}
+              {icons[item.id]}
+            </motion.button>
           )
         })}
         <motion.div
-          whileHover={{ scale: 1.06 }}
-          whileTap={{ scale: 0.94 }}
-          transition={{ duration: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-          className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-border-subtle bg-surface-3 text-[10px] font-semibold text-text-secondary"
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ duration: 0.12 }}
+          className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border border-border-faint text-[10px] font-semibold text-text-secondary"
         >
           A
         </motion.div>

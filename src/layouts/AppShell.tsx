@@ -34,11 +34,11 @@ export function AppShell({ children, active, onSelect }: AppShellProps) {
           <>
             <motion.div
               key="backdrop"
-              className="absolute inset-0 z-30 bg-black/55 backdrop-blur-sm"
+              className="absolute inset-0 z-30 bg-black/60 backdrop-blur-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.18, ease: [0.2, 0, 0, 1] }}
+              transition={{ duration: 0.18 }}
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
@@ -47,7 +47,7 @@ export function AppShell({ children, active, onSelect }: AppShellProps) {
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
-              transition={{ type: 'tween', duration: 0.26, ease: [0.2, 0, 0, 1] }}
+              transition={{ type: 'tween', duration: 0.28, ease: [0.2, 0, 0, 1] }}
             >
               <GlassSidebar active={active} onSelect={handleSelect} />
             </motion.div>

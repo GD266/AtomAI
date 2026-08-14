@@ -4,40 +4,68 @@ export function AmbientBackground() {
       aria-hidden
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
-      {/* Near-black base with a single broad cool gradient */}
+      {/* ===== Layer 1: Near-black base with subtle charcoal gradients ===== */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(1200px 760px at 50% -14%, rgb(255 255 255 / 0.028), transparent 60%), radial-gradient(980px 640px at 92% 114%, rgb(147 167 196 / 0.026), transparent 62%), radial-gradient(820px 520px at 4% 98%, rgb(147 167 196 / 0.016), transparent 60%)',
+            'radial-gradient(1200px 760px at 50% -8%, rgb(10 10 13 / 0.028), transparent 58%), radial-gradient(1000px 660px at 88% 114%, rgb(155 175 200 / 0.022), transparent 60%), radial-gradient(860px 540px at 6% 94%, rgb(135 160 200 / 0.015), transparent 58%)',
         }}
       />
 
-      {/* Soft center light behind the workspace */}
+      {/* ===== Layer 2: Center workspace depth (slowest drift, gentle opacity) ===== */}
       <div
-        className="absolute inset-0"
+        className="ambient-drift-a ambient-breathe absolute inset-0"
         style={{
           background:
-            'radial-gradient(640px 420px at 50% 30%, rgb(255 255 255 / 0.02), transparent 65%)',
-          filter: 'blur(56px)',
-        }}
-      />
-
-      {/* Faint cool glow along the top band */}
-      <div
-        className="absolute inset-x-0 top-0 h-[340px]"
-        style={{
-          background:
-            'linear-gradient(to bottom, rgb(147 167 196 / 0.028), transparent)',
+            'radial-gradient(720px 480px at 50% 30%, rgb(255 255 255 / 0.016), transparent 62%)',
           filter: 'blur(72px)',
         }}
       />
 
-      {/* Vignette — pulls the edges back to black */}
+      {/* ===== Layer 3: Soft gray-blue atmospheric glow - upper left (drifts) ===== */}
+      <div
+        className="ambient-drift-b absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(640px 420px at 18% 12%, rgb(160 180 220 / 0.019), transparent 64%)',
+          filter: 'blur(80px)',
+        }}
+      />
+
+      {/* ===== Layer 4: Subtle colored atmospheric glow - lower right (slower drift) ===== */}
+      <div
+        className="ambient-drift-c absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(600px 400px at 84% 88%, rgb(185 195 230 / 0.021), transparent 66%)',
+          filter: 'blur(76px)',
+        }}
+      />
+
+      {/* ===== Layer 5: Depth behind the icon rail ===== */}
+      <div
+        className="ambient-breathe absolute inset-y-0 left-0 w-[180px]"
+        style={{
+          background:
+            'linear-gradient(to right, rgb(160 180 220 / 0.018), transparent 76%)',
+        }}
+      />
+
+      {/* ===== Layer 6: Depth behind the top navigation ===== */}
+      <div
+        className="ambient-breathe absolute inset-x-0 top-0 h-[160px]"
+        style={{
+          background:
+            'linear-gradient(to bottom, rgb(255 255 255 / 0.016), transparent)',
+        }}
+      />
+
+      {/* ===== Layer 7: Gentle vignette to keep edges deep black ===== */}
       <div
         className="absolute inset-0"
         style={{
-          boxShadow: 'inset 0 0 200px 60px rgb(0 0 0 / 0.3)',
+          boxShadow: 'inset 0 0 200px 64px rgb(0 0 0 / 0.36)',
         }}
       />
     </div>
