@@ -7,9 +7,10 @@ import { cubicEasing, quickConfig, standardConfig } from '@/lib/motion'
 type TopNavProps = {
   active: SectionId
   onMenuOpen: () => void
+  onNewChat: () => void
 }
 
-export function TopNav({ active, onMenuOpen }: TopNavProps) {
+export function TopNav({ active, onMenuOpen, onNewChat }: TopNavProps) {
   const section = [...NAV_SECTIONS, ...NAV_FOOTER].find(
     (item) => item.id === active,
   )
@@ -62,6 +63,7 @@ export function TopNav({ active, onMenuOpen }: TopNavProps) {
 
       <motion.button
         type="button"
+        onClick={onNewChat}
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.985 }}
         transition={quickConfig}

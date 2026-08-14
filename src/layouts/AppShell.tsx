@@ -12,9 +12,10 @@ type AppShellProps = {
   children: ReactNode
   active: SectionId
   onSelect: (id: SectionId) => void
+  onNewChat: () => void
 }
 
-export function AppShell({ children, active, onSelect }: AppShellProps) {
+export function AppShell({ children, active, onSelect, onNewChat }: AppShellProps) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleSelect = (id: SectionId) => {
@@ -57,7 +58,7 @@ export function AppShell({ children, active, onSelect }: AppShellProps) {
         transition={{ duration: 0.32, ease: cubicEasing }}
         className="relative z-10 flex min-w-0 flex-1 flex-col"
       >
-        <TopNav active={active} onMenuOpen={() => setMenuOpen(true)} />
+        <TopNav active={active} onMenuOpen={() => setMenuOpen(true)} onNewChat={onNewChat} />
         <main className="relative flex-1 overflow-y-auto">
           {children}
         </main>

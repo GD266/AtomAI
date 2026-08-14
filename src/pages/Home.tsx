@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Atom, ArrowUp, ArrowUpRight, MessageSquare, Plus } from 'lucide-react'
+import { ArrowUp, ArrowUpRight, Atom } from 'lucide-react'
+import { ChatWorkspace } from '@/components/chat/ChatWorkspace'
 import type { SectionId } from '@/lib/navigation'
 import { cubicEasing, quickConfig, standardConfig } from '@/lib/motion'
+import type { ChatApi } from '@/types/chat'
 
 const PROMPTS = ['Summarize a long document', 'Plan my week ahead', 'Explain a complex idea']
 
@@ -23,7 +26,17 @@ const itemFadeUp = {
   visible: { opacity: 1, y: 0, transition: standardConfig },
 }
 
-function Hero() {
+function Hero({ onAsk }: { onAsk: (prompt: string) => void }) {
+  const [value, setValue] = useState('')
+  const canSend = value.trim().length > 0
+
+  const submit = () => {
+    const text = value.trim()
+    if (!text) return
+    onAsk(text)
+    setValue('')
+  }
+
   return (
     <div className="mx-auto flex min-h-full w-full max-w-[608px] flex-col justify-center px-6 pb-24 pt-12 sm:px-8">
       <motion.div
@@ -55,15 +68,24 @@ function Hero() {
         </motion.p>
 
         <motion.div variants={itemFadeUp} className="mt-10 w-full">
-          <div className="group relative flex h-[48px] items-center gap-2.5 rounded-[12px] border border-border-subtle bg-surface-raised/90 px-3.5 transition-colors duration-150">
-            <span className="pointer-events-none flex-1 text-left text-[14px] text-text-quiet">
-              Ask Atom AI anything…
-            </span>
+          <div className="flex h-[48px] items-center gap-2.5 rounded-[12px] border border-border-subtle bg-surface-raised/90 px-3.5 transition-colors duration-150 focus-within:border-border-strong">
+            <input
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  submit()
+                }
+              }}
+              placeholder="Ask Atom AI anything…"
+              className="flex-1 bg-transparent text-[14px] text-text-primary outline-none placeholder:text-text-quiet"
+            />
 
             <button
               type="button"
               aria-label="Voice"
-              className="flex h-8 w-8 items-center justify-center rounded-[8px] text-text-quiet transition-colors duration-150 hover:bg-overlay-subtle hover:text-text-secondary"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] text-text-quiet transition-colors duration-150 hover:bg-overlay-subtle hover:text-text-secondary"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={1.75}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 2 0-14 0h14z" />
@@ -74,7 +96,14 @@ function Hero() {
             <button
               type="button"
               aria-label="Send"
-              className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-white/10 text-white transition-colors duration-150 hover:bg-white/15"
+              onClick={submit}
+              disabled={!canSend}
+              className={
+                'flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] transition-colors duration-150 ' +
+                (canSend
+                  ? 'bg-white/10 text-white hover:bg-white/15'
+                  : 'bg-white/[0.03] text-text-quiet')
+              }
             >
               <ArrowUp className="h-4 w-4" strokeWidth={2} />
             </button>
@@ -85,6 +114,7 @@ function Hero() {
               <motion.button
                 key={p}
                 type="button"
+                onClick={() => onAsk(p)}
                 whileHover={{ scale: 1.01, y: -1 }}
                 whileTap={{ scale: 0.98 }}
                 transition={quickConfig}
@@ -98,34 +128,6 @@ function Hero() {
         </motion.div>
 
         <div className="mt-8 h-1 w-1 rounded-full bg-[#6fbf8f]" />
-      </motion.div>
-    </div>
-  )
-}
-
-function Empty() {
-  return (
-    <div className="flex min-h-full flex-col items-center justify-center">
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={standardConfig}
-        className="flex flex-col items-center"
-      >
-        <div className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-border-faint text-text-tertiary">
-          <MessageSquare className="h-5 w-5" strokeWidth={1.5} />
-        </div>
-        <h2 className="mt-5 text-[17px] font-semibold text-text-primary">No conversations yet</h2>
-        <p className="mt-2 text-[13px] text-text-tertiary">Ask anything and it will appear here.</p>
-        <motion.button
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          transition={quickConfig}
-          className="mt-6 flex items-center gap-1.5 rounded-[10px] border border-border-subtle bg-white/[0.02] px-4 py-2 text-[13px] text-text-tertiary"
-        >
-          <Plus className="h-3.5 w-3.5" strokeWidth={2} />
-          Start a chat
-        </motion.button>
       </motion.div>
     </div>
   )
@@ -212,15 +214,27 @@ function Settings() {
   )
 }
 
-export function Home({ active }: { active: SectionId }) {
+type HomeProps = {
+  active: SectionId
+  chat: ChatApi
+  onAsk: (prompt: string) => void
+}
+
+export function Home({ active, chat, onAsk }: HomeProps) {
   switch (active) {
     case 'chats':
-      return <Empty />
+      return (
+        <ChatWorkspace
+          messages={chat.messages}
+          isResponding={chat.isResponding}
+          onSend={chat.send}
+        />
+      )
     case 'models':
       return <Models />
     case 'settings':
       return <Settings />
     default:
-      return <Hero />
+      return <Hero onAsk={onAsk} />
   }
 }
