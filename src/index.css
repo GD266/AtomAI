@@ -4,28 +4,10 @@
 @import "./styles/glass";
 @import "./styles/animations";
 
-/* ===== Premium Layout Grid ===== */
-@layer utilities {
-  .hero-padding {
-    padding-left: calc(52px + 48px);
-    padding-right: calc(52px + 48px);
-    padding-top: 80px;
-    padding-bottom: 32px;
-  }
-
-  @media (max-width: 1023px) {
-    .hero-padding {
-      padding-left: 24px;
-      padding-right: 24px;
-      padding-top: 72px;
-      padding-bottom: 24px;
-    }
-  }
-}
-
-/* ===== Prompt Chip Utility ===== */
+/* ===== Prompt Chip Utility =====
+   Chat-first suggestion prompts: lean, text-based micro-interactions */
 @utility prompt-chip {
-  @apply flex items-center gap-1.5 rounded-full border border-border-faint bg-white/[0.02] px-3 py-1.5 text-[13px] text-text-tertiary transition-all duration-150;
+  @apply flex items-center gap-1.5 rounded-full border border-border-faint bg-white/[0.02] px-3 py-1.5 text-[13px] text-text-tertiary;
 }
 
 @utility prompt-chip-hover {

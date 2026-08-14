@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import { Atom, Home, MessageSquare, Cpu, Settings, Plus } from 'lucide-react'
-import type { ReactNode } from 'react'
 import { NAV_FOOTER, NAV_SECTIONS, RECENT } from '@/lib/navigation'
 import type { SectionId } from '@/lib/navigation'
+import { cubicEasing, quickConfig, railActiveIndicator } from '@/lib/motion'
 
-const icons: Record<SectionId, ReactNode> = {
+const icons: Record<SectionId, React.ReactNode> = {
   home: <Home className="h-4 w-4" />,
   chats: <MessageSquare className="h-4 w-4" />,
   models: <Cpu className="h-4 w-4" />,
@@ -22,10 +22,9 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
       initial={{ opacity: 0, x: -10 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -10 }}
-      transition={{ duration: 0.28, ease: [0.2, 0, 0, 1] }}
+      transition={{ duration: 0.24, ease: cubicEasing }}
       className="flex h-full w-64 flex-col bg-surface-modal backdrop-blur-xl shadow-soft-xl"
     >
-      {/* Brand */}
       <div className="flex items-center gap-2 px-4 pt-4 pb-3">
         <div className="flex h-6 w-6 items-center justify-center rounded-[8px] border border-border-faint bg-white/[0.015] text-text-tertiary">
           <Atom className="h-[13px] w-[13px]" strokeWidth={1.75} />
@@ -36,18 +35,18 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
         </div>
       </div>
 
-      {/* Primary action */}
       <div className="px-4 pb-3">
-        <button
-          type="button"
-          className="flex h-8 w-full items-center gap-1.5 rounded-[8px] bg-white/[0.02] px-3 text-[13px] font-medium text-text-tertiary transition-colors duration-150 hover:bg-white/[0.04] hover:text-text-secondary"
+        <motion.button
+          whileHover={{ scale: 1.008 }}
+          whileTap={{ scale: 0.985 }}
+          transition={quickConfig}
+          className="flex h-8 w-full items-center gap-1.5 rounded-[8px] border border-border-faint bg-white/[0.02] px-3 text-[13px] font-medium text-text-tertiary"
         >
           <Plus className="h-3.5 w-3.5" strokeWidth={1.75} />
           New chat
-        </button>
+        </motion.button>
       </div>
 
-      {/* Nav */}
       <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-4">
         {NAV_SECTIONS.map((item) => {
           const isActive = active === item.id
@@ -56,10 +55,11 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
               key={item.id}
               type="button"
               onClick={() => onSelect(item.id as SectionId)}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.12 }}
+              whileHover={{ scale: 1.008 }}
+              whileTap={{ scale: 0.985 }}
+              transition={quickConfig}
               className={
-                'relative flex items-center gap-3 rounded-[8px] px-3 py-2 text-[13px] font-medium transition-colors duration-150 ' +
+                'relative flex items-center gap-3 rounded-[8px] px-3 py-2 text-[13px] font-medium ' +
                 (isActive
                   ? 'text-text-primary'
                   : 'text-text-tertiary hover:text-text-secondary')
@@ -67,8 +67,8 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
             >
               {isActive && (
                 <motion.span
-                  layoutId="nav-indicator-drawer"
-                  transition={{ type: 'spring', stiffness: 480, damping: 38 }}
+                  layoutId={`drawer-indicator-${item.id}`}
+                  transition={railActiveIndicator}
                   className="absolute inset-0 rounded-[8px] border-l-2 border-accent"
                 />
               )}
@@ -78,7 +78,6 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
           )
         })}
 
-        {/* Recent */}
         <div className="mt-5 mb-2 px-2 text-[11px] font-medium tracking-widest text-text-quiet uppercase">
           Recent
         </div>
@@ -86,7 +85,11 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
           <motion.button
             key={item.title}
             type="button"
-            className="flex items-center justify-between rounded-[8px] px-3 py-2 text-start text-[13px] text-text-tertiary transition-colors duration-150 hover:bg-white/[0.02] hover:text-text-secondary"
+            onClick={() => onSelect('chats')}
+            whileHover={{ scale: 1.008 }}
+            whileTap={{ scale: 0.985 }}
+            transition={quickConfig}
+            className="flex items-center justify-between rounded-[8px] px-3 py-2 text-start text-[13px] text-text-tertiary"
           >
             <span className="truncate">{item.title}</span>
             <span className="text-[11px] text-text-quiet">{item.time}</span>
@@ -94,7 +97,6 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
         ))}
       </nav>
 
-      {/* Footer */}
       <div className="border-t border-border-faint px-4 py-3">
         {NAV_FOOTER.map((item) => {
           const isActive = active === item.id
@@ -103,10 +105,11 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
               key={item.id}
               type="button"
               onClick={() => onSelect(item.id as SectionId)}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.12 }}
+              whileHover={{ scale: 1.008 }}
+              whileTap={{ scale: 0.985 }}
+              transition={quickConfig}
               className={
-                'relative flex w-full items-center gap-3 rounded-[8px] px-3 py-2 text-[13px] font-medium transition-colors duration-150 ' +
+                'relative flex w-full items-center gap-3 rounded-[8px] px-3 py-2 text-[13px] font-medium ' +
                 (isActive
                   ? 'text-text-primary'
                   : 'text-text-tertiary hover:text-text-secondary')
@@ -114,8 +117,8 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
             >
               {isActive && (
                 <motion.span
-                  layoutId="nav-indicator-footer"
-                  transition={{ type: 'spring', stiffness: 480, damping: 38 }}
+                  layoutId={`footer-indicator-${item.id}`}
+                  transition={railActiveIndicator}
                   className="absolute inset-0 rounded-[8px] border-l-2 border-accent"
                 />
               )}
@@ -125,9 +128,14 @@ export function GlassSidebar({ active, onSelect }: GlassSidebarProps) {
           )
         })}
         <div className="mt-2 flex items-center gap-2.5 border-t border-border-faint pt-3">
-          <div className="flex h-6 w-6 items-center justify-center rounded-full border border-border-faint text-[10px] font-semibold text-text-secondary">
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={quickConfig}
+            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-full border border-border-faint text-[10px] font-semibold text-text-secondary"
+          >
             A
-          </div>
+          </motion.div>
           <div className="flex flex-col leading-tight">
             <span className="text-[13px] font-medium text-text-primary">Atom User</span>
             <span className="text-[11px] text-text-quiet">Local profile</span>

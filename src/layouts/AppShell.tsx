@@ -6,6 +6,7 @@ import { GlassSidebar } from '@/components/layout/GlassSidebar'
 import { Sidebar } from '@/components/layout/Sidebar'
 import { TopNav } from '@/components/layout/TopNav'
 import type { SectionId } from '@/lib/navigation'
+import { cubicEasing, drawerSlideIn, modalBackdrop } from '@/lib/motion'
 
 type AppShellProps = {
   children: ReactNode
@@ -25,29 +26,24 @@ export function AppShell({ children, active, onSelect }: AppShellProps) {
     <div className="relative flex h-svh overflow-hidden bg-background text-text-primary">
       <AmbientBackground />
 
-      {/* Desktop icon rail */}
       <Sidebar active={active} onSelect={handleSelect} />
 
-      {/* Mobile drawer */}
       <AnimatePresence initial={false}>
         {menuOpen && (
           <>
             <motion.div
               key="backdrop"
+              variants={modalBackdrop}
+              initial="initial"
+              animate="animate"
+              exit="exit"
               className="absolute inset-0 z-30 bg-black/60 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
               onClick={() => setMenuOpen(false)}
             />
             <motion.div
               key="drawer"
+              variants={drawerSlideIn}
               className="absolute inset-y-0 left-0 z-40 lg:hidden"
-              initial={{ x: '-100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '-100%' }}
-              transition={{ type: 'tween', duration: 0.28, ease: [0.2, 0, 0, 1] }}
             >
               <GlassSidebar active={active} onSelect={handleSelect} />
             </motion.div>
@@ -55,13 +51,17 @@ export function AppShell({ children, active, onSelect }: AppShellProps) {
         )}
       </AnimatePresence>
 
-      {/* Main column */}
-      <div className="relative z-10 flex min-w-0 flex-1 flex-col">
+      <motion.div
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.32, ease: cubicEasing }}
+        className="relative z-10 flex min-w-0 flex-1 flex-col"
+      >
         <TopNav active={active} onMenuOpen={() => setMenuOpen(true)} />
         <main className="relative flex-1 overflow-y-auto">
           {children}
         </main>
-      </div>
+      </motion.div>
     </div>
   )
 }
